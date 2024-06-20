@@ -1,0 +1,44 @@
+components:
+  schemas:
+    Users:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: kyyas
+        email:
+          type: string
+          example: kyyas@gmail.com
+        type:
+          type: string
+          enum: ['user', 'admin']
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    InputFieldsOfUsers:
+      type: object
+      properties:
+        username:
+          type: string
+          example: kyyas
+        email:
+          type: string
+          example: kyyas@gmail.com
+        password:
+          type: string
+          example: 123
+    LoginFields:
+      type: object
+      properties:
+        username:
+          type: string
+          example: kyyas
+        password:
+          type: string
+          example: 123

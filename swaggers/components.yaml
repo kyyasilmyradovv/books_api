@@ -1,0 +1,198 @@
+components:
+  parameters:
+    offsetParam:
+      in: query
+      name: offset
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      description: The number of items to skip
+    limitParam:
+      in: query
+      name: limit
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+      description: The numbers of items to return
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing | invalid | has no access
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: Missing or Invalid Auth Header
+    PathIdRequiredError:
+      description: UUID is required
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: UUID is required
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: Not Found
+    ConflictError:
+      description: Conflict occured
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: Conflict happened
+    NotValidError:
+      description: Must be valid type
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: Must be Valid type
+    InvalidCredentialsError:
+      description: Must be valid Credentials
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: Invalid Credentials
+    InvalidTokenError:
+      description: Invalid or expired token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: Invalid or expired token provided
+    NoAccessError:
+      description: No Access
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: You have no access
+    LargeFileError:
+      description: Uplaod file size limit has exceeded
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+              uploadLimit:
+                type: string
+            example:
+              status: fail
+              message: File size limit exceeded
+              uploadLimit: 110000
+    NoContent:
+      description: No Content
+    EmployeeLimitExceeds:
+      description: Employee limit exceeded
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+            example:
+              status: fail
+              message: Employee limit exceeded
+    SubscriptionDeadlinePassed:
+      description: Subscription deadline has passed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              message:
+                type: string
+              subscription:
+                type: object
+                properties:
+                  daysLeft:
+                    type: integer
+                  deadline:
+                    type: string
+                    format: date
+            example:
+              status: fail
+              message: Subscription deadline has passed
+              subscription:
+                daysLeft: 3
+                deadline: '2024-01-05'
+    ServerError:
+      description: Unexpected error in the server side

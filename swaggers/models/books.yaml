@@ -1,0 +1,50 @@
+components:
+  schemas:
+    Books:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: War and Peace
+        author:
+          type: string
+          example: Leo Tolstoy
+        publicationDate:
+          type: string
+          format: date
+          example: '1869-05-05'
+        genres:
+          type: array
+          items:
+            type: string
+          example: ['Novel', 'History']
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    InputFieldsOfBooks:
+      type: object
+      required:
+        - title
+        - author
+      properties:
+        title:
+          type: string
+          example: War and Peace
+        author:
+          type: string
+          example: Leo Tolstoy
+        publicationDate:
+          type: string
+          format: date
+          example: '1869-05-05'
+        genres:
+          type: array
+          items:
+            type: string
+          example: ['Novel', 'History']

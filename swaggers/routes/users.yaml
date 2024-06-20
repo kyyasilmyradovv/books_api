@@ -1,0 +1,74 @@
+paths:
+  /api/v1/users:
+    get:
+      tags: [Users]
+      description: Returns all users list
+      statuses: [404]
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: Search by username & email
+        - in: query
+          name: sortBy
+          description: Sort by column name
+          schema:
+            type: string
+            enum: ['createdAt', 'username']
+        - in: query
+          name: sortAs
+          description: Sort as ascending or descendin order
+          schema:
+            type: string
+            enum: ['asc', 'desc']
+      responses:
+        '200':
+          description: An array of objects which consists user information
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Users'
+  /api/v1/users/{id}:
+    get:
+      tags: [Users]
+      description: Get single user by id
+      statuses: [404]
+      parameters:
+        - in: path
+          name: id
+          description: User id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: An object which consists user information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+    put:
+      tags: [Users]
+      description: Edit existing user
+      statuses: [200, 400, 404, 409]
+      parameters:
+        - in: path
+          name: id
+          description: User id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: ['admin', 'user']

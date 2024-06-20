@@ -1,0 +1,129 @@
+paths:
+  /api/v1/users/login:
+    post:
+      tags: [Users]
+      description: Login to the system
+      statuses: [500]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginFields'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  refreshToken:
+                    type: string
+        '400':
+          description: Incorrect username or password
+  /api/v1/users/signup:
+    post:
+      tags: [Users]
+      description: Signup as a new user
+      statuses: [400, 500]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputFieldsOfUsers'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+        '409':
+          description: Username already in use
+  /api/v1/users/verify:
+    post:
+      tags: [Users]
+      description: Verify email
+      statuses: [500]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                code:
+                  type: string
+                  example: 12345
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  refreshToken:
+                    type: string
+        '400':
+          description: Incorrect code
+  /api/v1/users/refresh-token:
+    post:
+      tags: [Users]
+      description: Refresh user token
+      statuses: [409, 500]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  refreshToken:
+                    type: string
+  /api/v1/users/profile:
+    get:
+      tags: [Users]
+      description: Get my profile
+      statuses: [404]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Users'
+    patch:
+      tags: [Users]
+      description: Update my profile
+      statuses: [400, 404, 500]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        '200':
+          description: Successfully updated

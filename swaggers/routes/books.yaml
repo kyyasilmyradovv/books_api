@@ -1,0 +1,90 @@
+paths:
+  /api/v1/books:
+    get:
+      tags: [Books]
+      description: Returns all books list
+      statuses: [404]
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: Search by title & author name
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+            enum: ['title', 'publicationDate']
+          description: Sort by columns
+        - in: query
+          name: sortAs
+          schema:
+            type: string
+            enum: ['asc', 'desc']
+          description: Sort as ascending or descending order
+      responses:
+        '200':
+          description: An array of objects which consist book information
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Books'
+    post:
+      tags: [Books]
+      description: Add a new book
+      statuses: [201, 400, 404, 409]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputFieldsOfBooks'
+  /api/v1/books/{id}:
+    get:
+      tags: [Books]
+      description: Get single book by id
+      statuses: [404]
+      parameters:
+        - in: path
+          name: id
+          description: Book id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: An object which consists book information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Books'
+    put:
+      tags: [Books]
+      description: Edit existing book
+      statuses: [200, 400, 404, 409]
+      parameters:
+        - in: path
+          name: id
+          description: Book id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputFieldsOfBooks'
+    delete:
+      tags: [Books]
+      description: Delete book
+      statuses: [204, 400, 404, 409]
+      parameters:
+        - in: path
+          name: id
+          description: Book id
+          schema:
+            type: integer
+          required: true

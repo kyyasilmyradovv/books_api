@@ -1,0 +1,56 @@
+{
+  "name": "books_api",
+  "version": "1.0.0",
+  "description": "Api for books control",
+  "main": "server.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon -e js,yaml,json server.js",
+    "prod": "cross-env NODE_ENV=production nodemon -e js,json server.js",
+    "up": "npx sequelize-cli db:migrate",
+    "down": "npx sequelize-cli db:migrate:undo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyyasilmyradovv/books_api.git"
+  },
+  "keywords": [
+    "books_api",
+    "books_control",
+    "library"
+  ],
+  "author": "Kyyas Ilmyradov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyyasilmyradovv/books_api/issues"
+  },
+  "homepage": "https://github.com/kyyasilmyradovv/books_api#readme",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.14",
+    "nodemon": "^3.0.3",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.6.2",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^10.0.0",
+    "validator": "^13.9.0",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "sequelize-cli": "^6.6.1"
+  }
+}
